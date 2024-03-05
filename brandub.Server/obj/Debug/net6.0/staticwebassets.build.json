@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "Rfj2INJbRf3x1nj5x3SbgtnuHFqOpbsPz0px6rrPrZk=",
+  "Source": "brandub.Server",
+  "BasePath": "_content/brandub.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\Redmibook14\\source\\repos\\brandub\\brandub.client\\brandub.client.esproj",
+      "Version": 2,
+      "Source": "brandub.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
