@@ -25,13 +25,9 @@ export default class Board extends React.Component {
         }
 
         return (
-            <div>
+            <div className="board">
                 {board}
             </div>
         );
     }
-}
-
-function isEven(num){
-    return num % 2 == 0
 }

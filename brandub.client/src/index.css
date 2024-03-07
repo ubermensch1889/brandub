@@ -6,6 +6,30 @@
   box-sizing: border-box;
 }
 
+.button-holder {
+  text-align: center;
+}
+
+input[type=submit] {
+  background-color: #555; /* более темный серый фон */
+  border: none;
+  border-radius: 5px; /* скругленные края */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* тень */
+  padding: 10px 20px; /* отступ сверху и снизу */
+  color: #fff; /* цвет текста */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
+  margin: 20px auto;
+  margin-top: 15px;
+  margin-bottom: 0;
+ /* центрирование по горизонтали */
+}
+
+input[type=submit]:hover {
+  background-color: #333; /* изменение цвета фона при наведении */
+}
+
 .button-container {
   display: flex;
   flex: 1;

@@ -16,7 +16,7 @@ export default class Game extends React.Component {
             // -1 означает, что фигура еще не выбрана
             status: '',
             turn: 'attacker',
-            isGameOver: false
+            winner: 'none'
         }
     }
     
@@ -88,11 +88,13 @@ export default class Game extends React.Component {
                 const winner = this.getWinner(squares)
                 
                 if (winner === "attackers") {
-                    this.setState( { isGameOver: true })
+                    console.log("winn")
+                    this.setState( { winner: "attackers" })
                 }
                 
                 else if (winner === "defenders") {
-                    this.setState( { isGameOver: true })
+                    console.log("winn")
+                    this.setState( { winner: "defenders" })
                 }
                 
                 // проверяем, съел ли кто-нибудь кого-нибудь
@@ -117,31 +119,29 @@ export default class Game extends React.Component {
     }
 
     render() {
-
         return (
             <div>
-                <ResultModal>
-                    asdasd
+                <ResultModal visible={this.state.winner !== "none"}>
+                    {console.log(this.state)}
+                    <h2>{this.state.winner === "defenders" ?
+                        "Защитники победили!" :
+                        "Атакующие победили!"}
+                    <div className="button-holder">
+                    <form action="/">
+                        <input type="submit" value="Вернуться на главную страницу"/>
+                    </form>
+                    </div>
+                    </h2>
                 </ResultModal>
                 <div className="game">
                     <div className="game-board">
-                        <Board
+                    <Board
                             squares={this.state.squares}
                             onClick={(i) => this.handleClick(i)}
                         />
                     </div>
                 </div>
-
-                <div className="icons-attribution">
-                    <div> <small> Chess Icons And Favicon (extracted) By en:User:Cburnett [<a href="http://www.gnu.org/copyleft/fdl.html">GFDL</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA-3.0</a>, <a href="http://opensource.org/licenses/bsd-license.php">BSD</a> or <a href="http://www.gnu.org/licenses/gpl.html">GPL</a>], <a href="https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces">via Wikimedia Commons</a> </small></div>
-                </div>
-                <ul>
-                    <li><a href="https://github.com/TalhaAwan/react-chess" target="_blank">Source Code</a> </li>
-                    <li><a href="https://www.techighness.com/post/develop-two-player-chess-game-with-react-js/">Blog Post</a></li>
-                </ul>
             </div>
-
-
         );
     }
 
@@ -161,15 +161,16 @@ export default class Game extends React.Component {
             return "defenders"
         }
 
-        if (squares[6] && squares[0].isKing()) {
+        if (squares[6] && squares[6].isKing()) {
             return "defenders"
         }
 
-        if (squares[42] && squares[0].isKing()) {
+        if (squares[42] && squares[42].isKing()) {
             return "defenders"
         }
 
-        if (squares[48] && squares[0].isKing()) {
+        if (squares[48] && squares[48].isKing()) {
+            console.log("king came")
             return "defenders"
         }
         
@@ -199,6 +200,6 @@ export default class Game extends React.Component {
             }
         }
         
-        return "null"
+        return "none"
     }
 }

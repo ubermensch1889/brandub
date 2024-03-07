@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import classes from './ResultModal.module.css'
 
-const ResultModal = ({children, visible, setVisible}) => {
+const ResultModal = ({children, visible}) => {
     const rootClasses = [classes.resultModal]
     
     if (visible) {
@@ -9,7 +9,7 @@ const ResultModal = ({children, visible, setVisible}) => {
     }
     
     return (
-        <div className={[classes.resultModal, classes.resultModalContent].join(' ')}>
+        <div className={rootClasses.join(' ')}>
             <div className={classes.resultModalContent}>
                 {children}
             </div>
