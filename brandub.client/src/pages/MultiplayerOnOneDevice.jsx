@@ -1,10 +1,14 @@
 ﻿import Game from "@/components/Game.jsx";
-import { Fragment } from 'react'
+import {Fragment, useEffect} from 'react'
 import Header from "@/components/header/Header.jsx";
 
 export default function MultiplayerOnOneDevice() {
+    useEffect(() => {
+        document.title = 'Игра';
+    }, []);
     return (
         <Fragment>
+            
             <Header></Header>
             <Game />
         </Fragment>

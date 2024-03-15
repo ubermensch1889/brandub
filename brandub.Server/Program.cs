@@ -1,3 +1,8 @@
+using brandub.Server.DataAccess;
+using brandub.Server.DataAccess.Entities.Repositories;
+using brandub.Server.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace brandub.Server
 {
     public class Program
@@ -12,7 +17,16 @@ namespace brandub.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
+            // подключаем базу данных
+            builder.Services.AddDbContext<GameDbContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(GameDbContext)) ?? string.Empty);
+            });
 
+            builder.Services.AddScoped<GamesService>();
+            builder.Services.AddScoped<GamesRepository>();
+            
             var app = builder.Build();
 
             app.UseDefaultFiles();
