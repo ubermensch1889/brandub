@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IFyoThWERtSiyfudDfJb/a75Zl/uxFFW6FzkdqFHYB1F6gjzlVWN66TW+tt7+aqfOIx9yFKy+a/z+QqPXQcPhg==",
+  "dgSpecHash": "PeWEwB2MXIgnMCnDWnevvq0z3VKAWY37Ys/k5Ggwzr0wzgk6F9TdgC6Op5GXP7wRuy6MtQi4mNDdMRuMYN4Ypg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Redmibook14\\source\\repos\\brandub\\brandub.Server\\brandub.Server.csproj",
   "expectedPackageFiles": [
@@ -25,8 +25,8 @@
     "C:\\Users\\Redmibook14\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\Redmibook14\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Redmibook14\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
-    "C:\\Users\\Redmibook14\\.nuget\\packages\\npgsql\\6.0.10\\npgsql.6.0.10.nupkg.sha512",
-    "C:\\Users\\Redmibook14\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.22\\npgsql.entityframeworkcore.postgresql.6.0.22.nupkg.sha512",
+    "C:\\Users\\Redmibook14\\.nuget\\packages\\npgsql\\7.0.6\\npgsql.7.0.6.nupkg.sha512",
+    "C:\\Users\\Redmibook14\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.11\\npgsql.entityframeworkcore.postgresql.7.0.11.nupkg.sha512",
     "C:\\Users\\Redmibook14\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\Redmibook14\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\Redmibook14\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
