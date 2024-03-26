@@ -1,8 +1,10 @@
-﻿namespace brandub.Server.DataAccess.Entities;
+﻿using brandub.Server.Models;
+
+namespace brandub.Server.DataAccess.Entities;
 
 public class GameEntity
 {
-    public GameEntity(Guid id, string field, bool turn)
+    public GameEntity(Guid id, CellState[] field, bool turn)
     {
         Id = id;
         Field = field;
@@ -15,8 +17,8 @@ public class GameEntity
 
     public Guid Id { get; set; }
 
-    public string Field { get; set; } = string.Empty;
+    public CellState[] Field { get; set; }
 
-    public bool Turn { get; set; } = false;
+    public bool Turn { get; set; }
     // false - attackers, true - defenders
 }

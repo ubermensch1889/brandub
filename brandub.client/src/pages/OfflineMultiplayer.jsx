@@ -2,7 +2,7 @@
 import {Fragment, useEffect} from 'react'
 import Header from "@/components/header/Header.jsx";
 
-export default function MultiplayerOnOneDevice() {
+export default function OfflineMultiplayer() {
     useEffect(() => {
         document.title = 'Игра';
     }, []);

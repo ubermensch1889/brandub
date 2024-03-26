@@ -16,7 +16,7 @@ public class GamesRepository
     {
         var gameEntities = _context.Games.ToList();
 
-        var games = gameEntities.Select(g => new Game(g.Id, g.Field, g.Turn)).ToList();
+        var games = gameEntities.Select(g => new Game(g.Id)).ToList();
 
         return games;
     }
@@ -34,7 +34,7 @@ public class GamesRepository
         _context.SaveChanges();
     }
 
-    public void Update(Guid id, string field, bool turn)
+    public void Update(Guid id, CellState[] field, bool turn)
     {
         _context.Games
             .Where(g => g.Id == id)

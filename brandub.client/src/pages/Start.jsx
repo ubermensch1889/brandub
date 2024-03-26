@@ -1,7 +1,27 @@
-﻿import { Fragment } from 'react'
-import MultiplayerOnOneDevice from "@/pages/MultiplayerOnOneDevice.jsx";
+﻿import {Fragment, useCallback, useState} from 'react'
+import OfflineMultiplayer from "@/pages/OfflineMultiplayer.jsx";
+import MultiplayerModeChoiceModal from "@/components/MultiplayerModeChoiceModal/MultiplayerModeChoiceModal.jsx";
+import Button from "@/components/Button/Button.jsx";
 
 function Start() {
+    const [modal, setModal] = useState(false)
+    const [isSending, setIsSending] = useState(false)
+    
+    const [attackersAreChosen, setChosen] = useState(true)
+     
+    const sendRequest = useCallback(async () => {
+        if (isSending) return
+        setIsSending(true)
+        
+        let response = await fetch(`create-online-game/${attackersAreChosen}`, {
+            method: "GET"
+        });
+        let data = await response.json();
+        console.log(data)
+        
+        setIsSending(false)
+    }, [isSending])
+
     return (
         <Fragment>
             <header>
@@ -9,9 +29,29 @@ function Start() {
             </header>
             <div className="container">
                 <div className="modes-container">
-                    <a href="/multiplayer_on_one_device" className="mode">Игра вдвоем на одном компьютере</a>
+                    <a href="/offline-multiplayer" className="mode">Игра вдвоем на одном компьютере</a>
                     <div className="gap"></div>
-                    <a href="#" className="mode">Игра с ботом</a>
+                    <button className="mode" onClick={() => setModal(true)}>Игра с ботом</button>
+
+                    <MultiplayerModeChoiceModal visible={modal} setVisible={setModal}>
+                        <h2>
+                            Выберите сторону:
+                        </h2>
+                        <div>
+                            <label>
+                                <input type="radio" name="myRadio" defaultChecked 
+                                       onClick={() => setChosen(true)} />
+                                Атакующие
+                            </label>
+                            <label>
+                                <input type="radio" name="myRadio" onClick={() => setChosen(false)}/>
+                                Защитники
+                            </label>
+                        </div>
+
+                        <input type="button" disabled={isSending} onClick={sendRequest} value="Подтвердить"/>
+                    </MultiplayerModeChoiceModal>
+
                     <div className="gap"></div>
                     <a href="#" className="mode">Игра онлайн</a>
                 </div>

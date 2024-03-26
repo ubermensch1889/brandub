@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import {
     BrowserRouter as Router,
@@ -6,14 +5,15 @@ import {
     Route,
 } from "react-router-dom";
 import Start from "@/pages/Start.jsx";
-import MultiplayerOnOneDevice from "@/pages/MultiplayerOnOneDevice.jsx";
+import OfflineMultiplayer from "@/pages/OfflineMultiplayer.jsx";
 
 function App() {
     return (
         <Router>
             <Routes>
                 <Route exact path="/" element={<Start />} />
-                <Route path="/multiplayer_on_one_device" element={<MultiplayerOnOneDevice />} />
+                <Route path="/offline-multiplayer" element={<OfflineMultiplayer />} />
+                {/*<Route path="/online-multiplayer" element={<OnlineMultiplayer />} />*/}
             </Routes>
         </Router>
     );

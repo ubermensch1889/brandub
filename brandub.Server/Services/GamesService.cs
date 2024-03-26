@@ -22,7 +22,7 @@ public class GamesService
         _repository.Create(game);
     }
 
-    public void Update(Guid id, string field, bool turn)
+    public void Update(Guid id, CellState[] field, bool turn)
     {
         _repository.Update(id, field, turn);
     }

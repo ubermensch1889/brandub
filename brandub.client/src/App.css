@@ -37,10 +37,12 @@ h1 {
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
+    border : none;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     text-decoration: none;
+    color: #000000;
 }
 
 .mode:hover {

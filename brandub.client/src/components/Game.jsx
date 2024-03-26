@@ -122,7 +122,6 @@ export default class Game extends React.Component {
         return (
             <div>
                 <ResultModal visible={this.state.winner !== "none"}>
-                    {console.log(this.state)}
                     <h2>{this.state.winner === "defenders" ?
                         "Защитники победили!" :
                         "Атакующие победили!"}
