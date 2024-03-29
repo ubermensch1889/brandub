@@ -36,6 +36,7 @@ export default function OnlineMultiplayer(arrayLike) {
     const [board, setBoard] = useState(initialiseBoard())
     const [turn, setTurn] = useState("attacker")
     const [moveIsMade, setMoveIsMade] = useState(side !== "attacker")
+    const [isOver, setOver] = useState(false)
     
     useEffect(() => {
         document.title = 'Игра';
@@ -44,7 +45,7 @@ export default function OnlineMultiplayer(arrayLike) {
     }, []);
 
     async function getUpdatedBoard() {
-        if (!moveIsMade) return
+        if (!moveIsMade || isOver) return
         try {
             const response = await axios.get(`https://localhost:7048/multiplayer/get-updated-board/${id}/${side === "attacker"}`)
             console.log("resp:")
@@ -73,7 +74,7 @@ export default function OnlineMultiplayer(arrayLike) {
     useInterval(() => getUpdatedBoard(), 1000)
     
     function WrappedGame() {
-        return <OnlineGame id={id} side={side} setBoard={setBoard} board={board} turn={turn} setMoveIsMade={setMoveIsMade} setTurn={setTurn}/>
+        return <OnlineGame setOver={setOver} id={id} side={side} setBoard={setBoard} board={board} turn={turn} setMoveIsMade={setMoveIsMade} setTurn={setTurn}/>
     }
     console.log("rerender in main:")
     console.log(board)

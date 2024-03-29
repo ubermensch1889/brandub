@@ -38,6 +38,12 @@ public class GameController : ControllerBase
         return _service.IsStarted(id);
     }
     
+    /// <summary>
+    /// Получение информации о новом ходе противника
+    /// </summary>
+    /// <param name="id">Идентификатор игры</param>
+    /// <param name="turn">Информация о том, кто сейчас ходит</param>
+    /// <returns>Игровое поле</returns>
     [HttpGet("get-updated-board/{id:guid}/{turn:bool}")]
     public IEnumerable<CellState> GetUpdatedBoard(Guid id, bool turn)
     {
@@ -47,11 +53,15 @@ public class GameController : ControllerBase
         {
             return game.Field;
         }
-        
         // если доска не изменилась (так как противник не сходил), то возващаем пустое перечислимое
         return Enumerable.Empty<CellState>();
     }
     
+    /// <summary>
+    /// Обработка хода игрока
+    /// </summary>
+    /// <param name="info">Информация о ходе: поле, сторона и идентификатор</param>
+    /// <returns>Результат запроса</returns>
     [HttpPost("make-move")]
     public ActionResult MakeMove(MoveInfo? info)
     {
@@ -94,4 +104,20 @@ public class GameController : ControllerBase
         
         return Ok();
     }
+
+    /// <summary>
+    /// Удаление игры, если она есть в базе, иначе ничего
+    /// </summary>
+    /// <param name="id">Идентификатор игры</param>
+    /// <returns>Результат запроса</returns>
+    [HttpDelete("{id:guid}")]
+    public ActionResult DeleteGame(Guid id)
+    {
+        if (_service.Get().Exists(g => g.Id == id))
+        {
+            _service.Delete(id);
+        }
+
+        return Ok();
+    } 
 }

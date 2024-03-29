@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("brandub.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77bd806fa76f9ad8a924403c87adba482cbaf2b3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4b03eff9846f266b205e598ccea2a9d88e6c2379")]
 [assembly: System.Reflection.AssemblyProductAttribute("brandub.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("brandub.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

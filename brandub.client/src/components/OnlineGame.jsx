@@ -1,12 +1,9 @@
-﻿import React from 'react';
-import { useState } from 'react'
-import '../index.css';
-import Board from './Board.jsx';
-import initialiseBoard from '../game/initialiseBoard.js'
-import ResultModal from "@/components/ResultModal/ResultModal.jsx";
+﻿import '../index.css';
 import Game from "@/components/Game.jsx";
-import useInterval from "@/hooks/useInterval.js";
 import axios from "axios";
+import ResultModal from "@/components/ResultModal/ResultModal.jsx";
+import Board from "@/components/Board.jsx";
+import React from "react";
 
 export default class OnlineGame extends Game {
     constructor(props) {
@@ -88,10 +85,10 @@ export default class OnlineGame extends Game {
                 this.props.setMoveIsMade(true)
                 console.log("post")
                 const res = await axios.post(`https://localhost:7048/multiplayer/make-move`, {
-                        id: this.props.id,
-                        side: this.state.side === "attacker",
-                        board: Array.from(squares).map(square => square === null ? null : square.isKing() ? "king" : square.player)
-                    })
+                    id: this.props.id,
+                    side: this.state.side === "attacker",
+                    board: Array.from(squares).map(square => square === null ? null : square.isKing() ? "king" : square.player)
+                })
                 // ).then(res => console.log(res)).catch(err => console.log(err))
                 console.log(res)
                 console.log(squares)
@@ -110,6 +107,48 @@ export default class OnlineGame extends Game {
                 });
             }
         }
-        //console.log(this.state)
+    }
+
+    deleteGame() {
+        // TODO: сделать нормальное логирование
+        axios.delete(`https://localhost:7048/multiplayer/${this.props.id}`).catch(err => console.log(err))
+    }
+
+    render() {
+        const squares = this.state.squares
+        const winner = this.getWinner(squares)
+        
+        
+        // удаляем из бд игру, так как игры закончилась и мы получили ход (т.е. мы последние обращаемся к серверу)
+        if (winner !== "none") {
+            this.props.setOver(true)
+            if (this.state.turn === this.state.side) {
+                this.deleteGame()
+            }
+        }
+        
+        return (
+            <div>
+                <ResultModal visible={winner !== "none"}>
+                    <h2>{winner === "defender" ?
+                        "Защитники победили!" :
+                        "Атакующие победили!"}
+                        <div className="button-holder">
+                            <form action="/">
+                                <input type="submit" value="Вернуться на главную страницу"/>
+                            </form>
+                        </div>
+                    </h2>
+                </ResultModal>
+                <div className="game">
+                    <div className="game-board">
+                        <Board
+                            squares={this.state.squares}
+                            onClick={(i) => this.handleClick(i)}
+                        />
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
