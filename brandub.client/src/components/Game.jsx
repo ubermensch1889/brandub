@@ -27,7 +27,7 @@ export default class Game extends React.Component {
             if (squares[i] && squares[i + 1]
                 && squares[i + 2]
                 && squares[i + 1].player !== squares[i].player
-                && squares[i].player === squares[i + 2].player) {
+                && squares[i].player === squares[i + 2].player && !squares[i + 1].isKing()) {
                 squares[i + 1] = null
                 console.log("asdavf")
             }
@@ -35,7 +35,7 @@ export default class Game extends React.Component {
                 && squares[i + 7]
                 && squares[i + 14]
                 && squares[i + 7].player !== squares[i].player
-                && squares[i].player === squares[i + 14].player) {
+                && squares[i].player === squares[i + 14].player && !squares[i + 1].isKing()) {
                 squares[i + 7] = null
                 console.log("asdavf")
             }
@@ -43,7 +43,7 @@ export default class Game extends React.Component {
     }
 
     handleClick(i) {
-        const squares = [...this.state.squares];
+        const squares = this.state.squares;
 
         if (this.state.sourceSelection === -1) {
             if (!squares[i] || squares[i].player !== this.state.turn) {
@@ -102,7 +102,6 @@ export default class Game extends React.Component {
                 
                 this.setState(oldState => ({
                     sourceSelection: -1,
-                    squares: squares,
                     status: '',
                     turn: turn
                 }));
