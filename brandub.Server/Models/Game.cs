@@ -17,7 +17,16 @@ public class Game
             CellState.Empty, CellState.Empty, CellState.Empty, CellState.Attacker, CellState.Empty, CellState.Empty, CellState.Empty,
             CellState.Empty, CellState.Empty, CellState.Empty, CellState.Attacker, CellState.Empty, CellState.Empty, CellState.Empty
         };
-        Turn = false;
+        Turn = true;
+        Started = false;
+    }
+    
+    public Game(Guid id, CellState[] field, bool turn, bool started)
+    {
+        Id = id;
+        Field = field;
+        Turn = turn;
+        Started = started;
     }
 
     public Guid Id { get; }
@@ -25,5 +34,7 @@ public class Game
     public CellState[] Field { get; }
 
     public bool Turn { get; }
-    // false - attackers, true - defenders
+    // true - attackers, false - defenders
+    
+    public bool Started { get; }
 }

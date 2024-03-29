@@ -10,6 +10,16 @@ namespace brandub.Server
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var MyAllowSpecificOrigins = "Access-Control-Allow-Origin";
+            
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy  =>
+                    {
+                        policy.WithOrigins("https://localhost:7048");
+                    });
+            });
 
             // Add services to the container.
 
@@ -40,10 +50,15 @@ namespace brandub.Server
             }
 
             app.UseHttpsRedirection();
+            
+            app.UseCors(b => b
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+            );
 
             app.UseAuthorization();
-
-
+        
             app.MapControllers();
 
             app.MapFallbackToFile("/index.html");

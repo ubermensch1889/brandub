@@ -1,26 +1,31 @@
 ﻿import {Fragment, useCallback, useState} from 'react'
-import OfflineMultiplayer from "@/pages/OfflineMultiplayer.jsx";
 import MultiplayerModeChoiceModal from "@/components/MultiplayerModeChoiceModal/MultiplayerModeChoiceModal.jsx";
-import Button from "@/components/Button/Button.jsx";
+import {useNavigate} from "react-router-dom";
 
 function Start() {
     const [modal, setModal] = useState(false)
     const [isSending, setIsSending] = useState(false)
+    const [side, setSide] = useState("attacker")
     
-    const [attackersAreChosen, setChosen] = useState(true)
-     
-    const sendRequest = useCallback(async () => {
+    const navigate = useNavigate()
+
+    const createGame = async () =>
+    {
+        // отправляем запрос на создание игровой сессии
         if (isSending) return
         setIsSending(true)
-        
-        let response = await fetch(`create-online-game/${attackersAreChosen}`, {
-            method: "GET"
+
+        const response = await fetch("create-online-game", {
+            method: "POST"
         });
-        let data = await response.json();
-        console.log(data)
-        
+        const data = await response.text();
+        console.log(side)
+        navigate(`online-multiplayer/wait?id=${data}&side=${side}`.replace(/"/g, ""))
+
         setIsSending(false)
-    }, [isSending])
+    }
+    
+    const sendRequest = useCallback(createGame, [isSending, side])
 
     return (
         <Fragment>
@@ -40,11 +45,11 @@ function Start() {
                         <div>
                             <label>
                                 <input type="radio" name="myRadio" defaultChecked 
-                                       onClick={() => setChosen(true)} />
+                                       onClick={() => setSide("attacker")} />
                                 Атакующие
                             </label>
                             <label>
-                                <input type="radio" name="myRadio" onClick={() => setChosen(false)}/>
+                                <input type="radio" name="myRadio" onClick={() => setSide("defender")}/>
                                 Защитники
                             </label>
                         </div>

@@ -16,7 +16,7 @@ public class GamesRepository
     {
         var gameEntities = _context.Games.ToList();
 
-        var games = gameEntities.Select(g => new Game(g.Id)).ToList();
+        var games = gameEntities.Select(g => new Game(g.Id, g.Field, g.Turn, g.Started)).ToList();
 
         return games;
     }
@@ -27,20 +27,22 @@ public class GamesRepository
         {
             Id = game.Id,
             Field = game.Field,
-            Turn = game.Turn
+            Turn = game.Turn,
+            Started = game.Started
         };
 
         _context.Games.Add(gameEntity);
         _context.SaveChanges();
     }
 
-    public void Update(Guid id, CellState[] field, bool turn)
+    public void Update(Guid id, CellState[] field, bool turn, bool started)
     {
         _context.Games
             .Where(g => g.Id == id)
             .ExecuteUpdate(g => g
                 .SetProperty(e => e.Field, e => field)
-                .SetProperty(e => e.Turn, e => e.Turn));
+                .SetProperty(e => e.Turn, e => turn)
+                .SetProperty(e => e.Started, e => started));
     }
 
     public void Delete(Guid id)

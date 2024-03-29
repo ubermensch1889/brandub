@@ -9,7 +9,8 @@ public sealed class GameDbContext : DbContext
     public GameDbContext(DbContextOptions<GameDbContext> options) : base(options)
     {
         // создаем базу, если ее нет
-        Database.EnsureCreated();
+        // Database.EnsureDeleted();
+        // Database.EnsureCreated();
     }
     
     public DbSet<GameEntity> Games { get; set; }

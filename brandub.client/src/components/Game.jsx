@@ -8,8 +8,8 @@ import initialiseBoard from '../game/initialiseBoard.js'
 import ResultModal from "@/components/ResultModal/ResultModal.jsx";
 
 export default class Game extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             squares: initialiseBoard(),
             sourceSelection: -1,
@@ -87,19 +87,19 @@ export default class Game extends React.Component {
                 let turn = this.state.turn === 'attacker' ? 'defender' : 'attacker';
                 const winner = this.getWinner(squares)
                 
-                if (winner === "attackers") {
+                if (winner === "attacker") {
                     console.log("winn")
-                    this.setState( { winner: "attackers" })
+                    this.setState( { winner: "attacker" })
                 }
                 
-                else if (winner === "defenders") {
+                else if (winner === "defender") {
                     console.log("winn")
-                    this.setState( { winner: "defenders" })
+                    this.setState( { winner: "defender" })
                 }
                 
                 // проверяем, съел ли кто-нибудь кого-нибудь
                 this.HandleEaten(squares)
-
+                
                 this.setState(oldState => ({
                     sourceSelection: -1,
                     squares: squares,
@@ -119,10 +119,13 @@ export default class Game extends React.Component {
     }
 
     render() {
+        const squares = this.state.squares
+        const winner = this.getWinner(squares)
+        
         return (
             <div>
-                <ResultModal visible={this.state.winner !== "none"}>
-                    <h2>{this.state.winner === "defenders" ?
+                <ResultModal visible={winner !== "none"}>
+                    <h2>{winner === "defender" ?
                         "Защитники победили!" :
                         "Атакующие победили!"}
                     <div className="button-holder">
@@ -157,20 +160,20 @@ export default class Game extends React.Component {
         
         // случай победы защитников, когда они сумели довести короля до одного из углов
         if (squares[0] && squares[0].isKing()) {
-            return "defenders"
+            return "defender"
         }
 
         if (squares[6] && squares[6].isKing()) {
-            return "defenders"
+            return "defender"
         }
 
         if (squares[42] && squares[42].isKing()) {
-            return "defenders"
+            return "defender"
         }
 
         if (squares[48] && squares[48].isKing()) {
             console.log("king came")
-            return "defenders"
+            return "defender"
         }
         
         // проверка на то, съели ли короля, но мы делаем это до самого взятия, чтобы было как в шахматах
@@ -182,7 +185,7 @@ export default class Game extends React.Component {
                 && squares[i + 1].isKing()) {
                 
                 console.log('attackers won')
-                return "attackers"
+                return "attacker"
                 
             }
             if (i + 14 < squares.length && squares[i]
@@ -195,7 +198,7 @@ export default class Game extends React.Component {
 
                 console.log('attackers won')
                 
-                return "attackers"
+                return "attacker"
             }
         }
         

@@ -14,8 +14,8 @@ public class CreatingMultiplayerGameController : ControllerBase
         _service = service;
     }
     
-    [HttpPost("{attackersAreChosen:bool}")]
-    public Guid Post(bool attackersAreChosen)
+    [HttpPost]
+    public Guid Post()
     {
         // будем возвращать id новосозданной игры
         var id = Guid.NewGuid();
