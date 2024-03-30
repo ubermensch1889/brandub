@@ -1,9 +1,9 @@
-﻿import Game from "@/components/Game.jsx";
-import {Fragment, useEffect, useState} from 'react'
+﻿import {Fragment, useEffect, useState} from 'react'
 import Header from "@/components/header/Header.jsx";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import useInterval from "@/hooks/useInterval.js";
 import axios from "axios";
+import CopyableText from "@/components/CopyableText/CopyableText.jsx";
 
 export default function WaitAnotherSide() {
     let [searchParams, setSearchParams] = useSearchParams()
@@ -41,7 +41,7 @@ export default function WaitAnotherSide() {
     return (
         <Fragment>
             <Header/>
-            <p>{`https://${window.location.host}/online-multiplayer/game?id=${id}&side=${side === "attacker" ? "defender" : "attacker"}`}</p>
+            <CopyableText>{`https://${window.location.host}/online-multiplayer/game?id=${id}&side=${side === "attacker" ? "defender" : "attacker"}`}</CopyableText>
         </Fragment>
     )
 }

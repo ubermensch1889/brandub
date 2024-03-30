@@ -36,7 +36,7 @@ function Start() {
                 <div className="modes-container">
                     <a href="/offline-multiplayer" className="mode">Игра вдвоем на одном компьютере</a>
                     <div className="gap"></div>
-                    <button className="mode" onClick={() => setModal(true)}>Игра с ботом</button>
+                    <a className="mode" onClick={() => setModal(true)}>Игра с ботом</a>
 
                     <MultiplayerModeChoiceModal visible={modal} setVisible={setModal}>
                         <h2>
@@ -54,7 +54,7 @@ function Start() {
                             </label>
                         </div>
 
-                        <input type="button" disabled={isSending} onClick={sendRequest} value="Подтвердить"/>
+                        <input type="submit" disabled={isSending} onClick={sendRequest} value="Подтвердить"/>
                     </MultiplayerModeChoiceModal>
 
                     <div className="gap"></div>
