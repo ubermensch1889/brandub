@@ -21,7 +21,7 @@ export default class Game extends React.Component {
     }
     
     // метод для проверки наличия съеденных фигур
-    HandleEaten(squares) {
+    handleEaten(squares) {
         // по-хорошему этот код надо переделать, он мне не нравится
         for (let i = 0; i < squares.length - 2; ++i) {
             if (squares[i] && squares[i + 1]
@@ -35,7 +35,7 @@ export default class Game extends React.Component {
                 && squares[i + 7]
                 && squares[i + 14]
                 && squares[i + 7].player !== squares[i].player
-                && squares[i].player === squares[i + 14].player && !squares[i + 1].isKing()) {
+                && squares[i].player === squares[i + 14].player && !squares[i + 14].isKing()) {
                 squares[i + 7] = null
                 console.log("asdavf")
             }
@@ -98,7 +98,7 @@ export default class Game extends React.Component {
                 }
                 
                 // проверяем, съел ли кто-нибудь кого-нибудь
-                this.HandleEaten(squares)
+                this.handleEaten(squares)
                 
                 this.setState(oldState => ({
                     sourceSelection: -1,

@@ -5,9 +5,10 @@ import {
     Route,
 } from "react-router-dom";
 import Start from "@/pages/Start.jsx";
-import OfflineMultiplayer from "@/pages/OfflineMultiplayer.jsx";
-import WaitAnotherSide from "@/pages/WaitAnotherSide.jsx";
-import OnlineMultiplayer from "@/pages/OnlineMultiplayer.jsx";
+import OfflineMultiplayerPage from "@/pages/OfflineMultiplayer.jsx";
+import WaitAnotherSidePage from "@/pages/WaitAnotherSide.jsx";
+import OnlineMultiplayerPage from "@/pages/OnlineMultiplayer.jsx";
+import GameWithBotPage from "@/pages/GameWithBotPage.jsx";
 
 
 function App() {
@@ -15,10 +16,10 @@ function App() {
         <Router>
             <Routes>
                 <Route exact path="/" element={<Start />} />
-                <Route path="/offline-multiplayer" element={<OfflineMultiplayer />} />
-                <Route path="/online-multiplayer/wait" element={<WaitAnotherSide />} />
-                <Route path="/online-multiplayer/game" element={<OnlineMultiplayer />} />
-
+                <Route path="/offline-multiplayer" element={<OfflineMultiplayerPage />} />
+                <Route path="/online-multiplayer/wait" element={<WaitAnotherSidePage />} />
+                <Route path="/online-multiplayer/game" element={<OnlineMultiplayerPage />} />
+                <Route path="/game-with-bot" element={<GameWithBotPage />} />
             </Routes>
         </Router>
     );

@@ -4,29 +4,31 @@ import axios from "axios";
 import ResultModal from "@/components/ResultModal/ResultModal.jsx";
 import Board from "@/components/Board.jsx";
 import React from "react";
+import initialiseBoard from "@/game/initialiseBoard.js";
+import AttackerBot from "@/bot/AttackerBot.js";
 
-export default class OnlineGame extends Game {
+export default class GameWithBot extends Game {
     constructor(props) {
         super(props);
-        console.log(this.props)
         this.state = {
-            squares: this.props.board,
-            setBoard: this.props.setBoard,
+            squares: initialiseBoard(),
             sourceSelection: -1,
             // -1 означает, что фигура еще не выбрана
             status: '',
-            turn: this.props.turn,
+            turn: this.props.side,
             winner: 'none',
             side: this.props.side
+        }
+        this.bot = this.props.side === "attacker" ? null : new AttackerBot(this.state.squares)
+        if (this.state.side === "defender") {
+            this.bot.makeMove(this.state.squares)
         }
     }
 
     async handleClick(i) {
-        // не наша очередь ходить
         if (this.state.turn !== this.state.side) {
             return;
         }
-
         const squares = [...this.state.squares];
 
         if (this.state.sourceSelection === -1) {
@@ -79,20 +81,16 @@ export default class OnlineGame extends Game {
 
                 // проверяем, съел ли кто-нибудь кого-нибудь
                 this.handleEaten(squares)
-
-                this.state.setBoard(squares)
-                this.props.setTurn(turn)
-                this.props.setMoveIsMade(true)
-                console.log("post")
-                const res = await axios.post(`https://localhost:7048/multiplayer/make-move`, {
-                    id: this.props.id,
-                    side: this.state.side === "attacker",
-                    board: Array.from(squares).map(square => square === null ? null : square.isKing() ? "king" : square.player)
-                })
-                // ).then(res => console.log(res)).catch(err => console.log(err))
-                console.log(res)
-                console.log(squares)
-                console.log("asd")
+                
+                setTimeout(() => {
+                    this.bot.makeMove(squares)
+                    this.setState({
+                        turn: this.state.side,
+                        squares: this.bot.squares
+                    })
+                    this.handleEaten(this.bot.squares)
+                }, 1000)
+                
 
                 this.setState(oldState => ({
                     sourceSelection: -1,
@@ -109,24 +107,10 @@ export default class OnlineGame extends Game {
         }
     }
 
-    deleteGame() {
-        // TODO: сделать нормальное логирование
-        axios.delete(`https://localhost:7048/multiplayer/${this.props.id}`).catch(err => console.log(err))
-    }
-
     render() {
         const squares = this.state.squares
         const winner = this.getWinner(squares)
-        
-        
-        // удаляем из бд игру, так как игры закончилась и мы получили ход (т.е. мы последние обращаемся к серверу)
-        if (winner !== "none") {
-            this.props.setOver(true)
-            if (this.state.turn === this.state.side) {
-                this.deleteGame()
-            }
-        }
-        
+
         return (
             <div>
                 <ResultModal visible={winner !== "none"}>

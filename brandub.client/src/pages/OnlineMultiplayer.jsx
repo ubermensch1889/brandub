@@ -28,7 +28,7 @@ function getBoardFromData(data) {
     return squares
 }
 
-export default function OnlineMultiplayer(arrayLike) {
+export default function OnlineMultiplayer() {
     let [searchParams, setSearchParams] = useSearchParams()
     const id = searchParams.get("id")
     const side = searchParams.get("side")

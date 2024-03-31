@@ -3,7 +3,8 @@ import MultiplayerModeChoiceModal from "@/components/MultiplayerModeChoiceModal/
 import {useNavigate} from "react-router-dom";
 
 function Start() {
-    const [modal, setModal] = useState(false)
+    const [onlineModal, setOnlineModal] = useState(false)
+    const [botModal, setBotModal] = useState(false)
     const [isSending, setIsSending] = useState(false)
     const [side, setSide] = useState("attacker")
     
@@ -36,20 +37,20 @@ function Start() {
                 <div className="modes-container">
                     <a href="/offline-multiplayer" className="mode">Игра вдвоем на одном компьютере</a>
                     <div className="gap"></div>
-                    <a className="mode" onClick={() => setModal(true)}>Игра с ботом</a>
+                    <a className="mode" onClick={() => setOnlineModal(true)}>Игра онлайн</a>
 
-                    <MultiplayerModeChoiceModal visible={modal} setVisible={setModal}>
+                    <MultiplayerModeChoiceModal visible={onlineModal} setVisible={setOnlineModal}>
                         <h2>
                             Выберите сторону:
                         </h2>
                         <div>
                             <label>
-                                <input type="radio" name="myRadio" defaultChecked 
+                                <input type="radio" name="multiplayerChoice" defaultChecked 
                                        onClick={() => setSide("attacker")} />
                                 Атакующие
                             </label>
                             <label>
-                                <input type="radio" name="myRadio" onClick={() => setSide("defender")}/>
+                                <input type="radio" name="multiplayerChoice" onClick={() => setSide("defender")}/>
                                 Защитники
                             </label>
                         </div>
@@ -58,7 +59,25 @@ function Start() {
                     </MultiplayerModeChoiceModal>
 
                     <div className="gap"></div>
-                    <a href="#" className="mode">Игра онлайн</a>
+                    <a className="mode" onClick={() => setBotModal(true)}>Игра с ботом</a>
+                    <MultiplayerModeChoiceModal visible={botModal} setVisible={setBotModal}>
+                        <h2>
+                            Выберите сторону:
+                        </h2>
+                        <div>
+                            <label>
+                                <input type="radio" name="botChoice" defaultChecked
+                                       onClick={() => setSide("attacker")} />
+                                Атакующие
+                            </label>
+                            <label>
+                                <input type="radio" name="botChoice" onClick={() => setSide("defender")}/>
+                                Защитники
+                            </label>
+                        </div>
+
+                        <input type="submit" onClick={() => navigate(`game-with-bot?side=${side}`)} value="Подтвердить"/>
+                    </MultiplayerModeChoiceModal>
                 </div>
                 <div className="rules">
                     <h2>Правила игры "Брандуб"</h2>
