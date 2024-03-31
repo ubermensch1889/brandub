@@ -6,6 +6,7 @@ import Board from "@/components/Board.jsx";
 import React from "react";
 import initialiseBoard from "@/game/initialiseBoard.js";
 import AttackerBot from "@/bot/AttackerBot.js";
+import DefenderBot from "@/bot/DefenderBot.js";
 
 export default class GameWithBot extends Game {
     constructor(props) {
@@ -19,7 +20,7 @@ export default class GameWithBot extends Game {
             winner: 'none',
             side: this.props.side
         }
-        this.bot = this.props.side === "attacker" ? null : new AttackerBot(this.state.squares)
+        this.bot = this.props.side === "attacker" ? new DefenderBot() : new AttackerBot()
         if (this.state.side === "defender") {
             this.bot.makeMove(this.state.squares)
         }
@@ -77,20 +78,19 @@ export default class GameWithBot extends Game {
                 } else if (winner === "defender") {
                     console.log("winn")
                     this.setState({winner: "defender"})
-                }
+                } else {
+                    // проверяем, съел ли кто-нибудь кого-нибудь
+                    this.handleEaten(squares)
 
-                // проверяем, съел ли кто-нибудь кого-нибудь
-                this.handleEaten(squares)
-                
-                setTimeout(() => {
-                    this.bot.makeMove(squares)
-                    this.setState({
-                        turn: this.state.side,
-                        squares: this.bot.squares
-                    })
-                    this.handleEaten(this.bot.squares)
-                }, 1000)
-                
+                    setTimeout(() => {
+                        this.bot.makeMove(squares)
+                        this.setState({
+                            turn: this.state.side,
+                            squares: this.bot.squares
+                        })
+                        this.handleEaten(this.bot.squares)
+                    }, 1000)
+                }
 
                 this.setState(oldState => ({
                     sourceSelection: -1,

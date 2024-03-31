@@ -43,7 +43,7 @@ export default class Game extends React.Component {
     }
 
     handleClick(i) {
-        const squares = this.state.squares;
+        const squares =  this.state.squares;
 
         if (this.state.sourceSelection === -1) {
             if (!squares[i] || squares[i].player !== this.state.turn) {
@@ -75,10 +75,6 @@ export default class Game extends React.Component {
             const srcToDestPath = squares[this.state.sourceSelection].getSrcToDestPath(this.state.sourceSelection, i)
             // проверка на наличие других фигур на пути
             const isMoveLegal = this.isMoveLegal(srcToDestPath);
-            
-            console.log(isMovePossible.toString())
-            console.log(isMoveLegal.toString())
-
 
             if (isMovePossible && isMoveLegal) {
                 squares[i] = squares[this.state.sourceSelection];
@@ -97,10 +93,12 @@ export default class Game extends React.Component {
                     this.setState( { winner: "defender" })
                 }
                 
-                // проверяем, съел ли кто-нибудь кого-нибудь
-                this.handleEaten(squares)
+                else {
+                    // проверяем, съел ли кто-нибудь кого-нибудь
+                    this.handleEaten(squares)
+                }
                 
-                this.setState(oldState => ({
+                this.setState(oldState => ({ 
                     sourceSelection: -1,
                     status: '',
                     turn: turn
@@ -118,8 +116,11 @@ export default class Game extends React.Component {
     }
 
     render() {
+        console.log("render")
         const squares = this.state.squares
         const winner = this.getWinner(squares)
+        console.log(squares)
+        console.log(winner)
         
         return (
             <div>
@@ -193,7 +194,6 @@ export default class Game extends React.Component {
                 && squares[i + 7].player !== squares[i].player
                 && squares[i].player === squares[i + 14].player
                 && squares[i + 7].isKing()) {
-                squares[i + 7] = null
 
                 console.log('attackers won')
                 
