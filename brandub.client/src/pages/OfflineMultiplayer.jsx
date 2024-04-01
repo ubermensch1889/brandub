@@ -6,6 +6,7 @@ export default function OfflineMultiplayer() {
     useEffect(() => {
         document.title = 'Игра';
     }, []);
+    
     return (
         <Fragment>
             

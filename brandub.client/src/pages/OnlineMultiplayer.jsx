@@ -29,7 +29,11 @@ function getBoardFromData(data) {
 }
 
 export default function OnlineMultiplayer() {
-    let [searchParams, setSearchParams] = useSearchParams()
+    useEffect(() => {
+        document.title = "Онлайн игра";
+    }, []);
+    
+    const [searchParams, setSearchParams] = useSearchParams()
     const id = searchParams.get("id")
     const side = searchParams.get("side")
     const navigate = useNavigate()

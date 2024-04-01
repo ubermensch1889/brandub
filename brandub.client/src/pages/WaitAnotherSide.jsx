@@ -11,10 +11,8 @@ export default function WaitAnotherSide() {
     const side = searchParams.get("side")
     const navigate = useNavigate()
     
-    const [started, setStarted] = useState(false)
-    
     useEffect(() => {
-        document.title = 'Игра';
+        document.title = 'Ожидание второго игрока';
     }, []);
 
     // функция для получения информации о том, подключился ли второй игрок
