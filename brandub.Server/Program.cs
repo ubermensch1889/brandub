@@ -10,11 +10,11 @@ namespace brandub.Server
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var MyAllowSpecificOrigins = "Access-Control-Allow-Origin";
+            var myAllowSpecificOrigins = "Access-Control-Allow-Origin";
             
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
+                options.AddPolicy(name: myAllowSpecificOrigins,
                     policy  =>
                     {
                         policy.WithOrigins("https://localhost:7048");
