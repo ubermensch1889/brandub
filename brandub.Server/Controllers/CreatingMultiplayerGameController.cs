@@ -15,7 +15,7 @@ public class CreatingMultiplayerGameController : ControllerBase
     }
     
     [HttpPost]
-    public Guid Post()
+    public Guid CreateGame()
     {
         // будем возвращать id новосозданной игры
         var id = Guid.NewGuid();
