@@ -4,6 +4,9 @@
     color: #333;
     margin: 0;
     padding: 0;
+    background-image: url('assets/runes.png');
+    background-repeat: repeat;
+    background-size: 250px;
 }
 
 header {
@@ -111,7 +114,6 @@ h1 {
     min-height: 50px;
 }
 
-/*Board color scheme Wheat from http://omgchess.blogspot.com/2015/09/chess-board-color-schemes.html*/
 .square{
     background-color: RGB(234,240,206);
 }
