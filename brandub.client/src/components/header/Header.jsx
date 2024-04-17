@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 
 const HeaderContainer = styled.header`
-  height: 50px;
+  height: 60px;
   display: flex;
   padding: 0 2rem;
   justify-content: space-between;
@@ -12,22 +12,9 @@ const HeaderContainer = styled.header`
 `
 
 export default function Header() {
-  const [now, setNow] = useState(new Date())
-
-  useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 1000)
-
-    return () => {
-      clearInterval(interval)
-      console.log('cleaning...')
-    }
-  }, [])
-
   return (
       <HeaderContainer>
-         
           <h1>Brundub</h1>
-        <span>Время сейчас: {now.toLocaleTimeString()}</span>
       </HeaderContainer>
   )
 }

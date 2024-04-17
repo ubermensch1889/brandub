@@ -1,6 +1,7 @@
 ﻿import {Fragment, useCallback, useEffect, useState} from 'react'
 import MultiplayerModeChoiceModal from "@/components/MultiplayerModeChoiceModal/MultiplayerModeChoiceModal.jsx";
 import {useNavigate} from "react-router-dom";
+import Header from "@/components/header/Header.jsx";
 
 function Start() {
     useEffect(() => {
@@ -34,9 +35,7 @@ function Start() {
 
     return (
         <Fragment>
-            <header>
-                <h1>Брандуб</h1>
-            </header>
+            <Header/>
             <div className="container">
                 <div className="modes-container">
                     <a href="/offline-multiplayer" className="mode">Игра вдвоем на одном компьютере</a>

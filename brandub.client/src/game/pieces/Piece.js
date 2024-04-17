@@ -1,7 +1,7 @@
 ﻿export default class Piece {
     constructor(player, iconUrl){
         this.player = player
-        this.style = {backgroundImage: "url('https://github.com/ubermensch1889/brandub/blob/develop/brandub.client/src/assets/output-onlinepngtools.png'), url('"+iconUrl+"')"}
+        this.style = {backgroundImage: "url('"+iconUrl+"')"}
     }
     
     isKing() {
