@@ -61,9 +61,6 @@ export default class GameWithBot extends Game {
             // проверка на наличие других фигур на пути
             const isMoveLegal = this.isMoveLegal(srcToDestPath);
 
-            console.log(isMovePossible.toString())
-            console.log(isMoveLegal.toString())
-
 
             if (isMovePossible && isMoveLegal) {
                 squares[i] = squares[this.state.sourceSelection];
@@ -73,10 +70,8 @@ export default class GameWithBot extends Game {
                 const winner = this.getWinner(squares)
 
                 if (winner === "attacker") {
-                    console.log("winn")
                     this.setState({winner: "attacker"})
                 } else if (winner === "defender") {
-                    console.log("winn")
                     this.setState({winner: "defender"})
                 } else {
                     // проверяем, съел ли кто-нибудь кого-нибудь
@@ -124,12 +119,19 @@ export default class GameWithBot extends Game {
                         </div>
                     </h2>
                 </ResultModal>
-                <div className="game">
-                    <div className="game-board">
-                        <Board
-                            squares={this.state.squares}
-                            onClick={(i) => this.handleClick(i)}
-                        />
+                <div className="centered-container">
+                    <div className="game">
+                        <div className="game-board">
+                            <Board
+                                squares={this.state.squares}
+                                onClick={(i) => this.handleClick(i)}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="centered-container">
+                    <div className="turn-window">
+                        <p style={{textAlign: "center"}}>Ход {this.state.turn === "attacker" ? "атакующих" : "защитников"}</p>
                     </div>
                 </div>
             </div>

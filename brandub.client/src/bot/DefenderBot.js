@@ -16,17 +16,14 @@ export default class DefenderBot extends Bot {
     makeMove(squares) {
         this.squares = squares
         if (this.tryWin()) {
-            console.log("win")
             return
         }
 
         if (this.tryEatSomeThing()) {
-            console.log("eatSmth")
             return
         }
 
         if (this.tryMoveKing()) {
-            console.log("eatSmth")
             return
         }
 
@@ -89,8 +86,6 @@ export default class DefenderBot extends Bot {
                     }
 
                     // проверяем ходы по горизонтали, когда защитник внизу
-                    console.log("asdf")
-                    console.log(pos)
                     if (pos - 14 >= 0 && this.squares[pos - 14] && this.squares[pos - 7] &&
                         this.squares[pos - 14].player === "defender" &&
                         this.squares[pos - 7].player === "attacker") {

@@ -66,9 +66,7 @@ h1 {
 }
 
 .board {
-    width: 44%;
-    margin: 0 auto;
-    margin-top: 20px;
+    margin: 20px auto 0;
 }
 
 .board-row:after {
@@ -82,6 +80,7 @@ h1 {
 }
 
 .square {
+    display: flex;
     background-size: cover;
     border: 1px solid rgba(0,0,0,0.2);
     float: left;
@@ -108,6 +107,22 @@ h1 {
     margin-left: 20px;
 }
 
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.turn-window {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 10px; 
+    padding: 1px;
+    box-shadow: 0 4px 20px 2px rgba(100, 100, 100, 0.5); 
+    width: 200px; 
+    height: 50px;
+}
 
 .icons-attribution, .game-status, .fallen-soldier-block{
     margin-top: 20px;

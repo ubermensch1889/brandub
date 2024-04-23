@@ -45,27 +45,19 @@ export default function OnlineMultiplayer() {
     useEffect(() => {
         document.title = 'Игра';
         // посылаем сигнал о подключении
-        axios.post(`https://localhost:7048/multiplayer/start/${id}`).then(resp => console.log(resp)).catch(err => console.log(err))
+        axios.post(`https://localhost:7048/multiplayer/start/${id}`).catch(err => console.log(err))
     }, []);
 
     async function getUpdatedBoard() {
         if (!moveIsMade || isOver) return
         try {
             const response = await axios.get(`https://localhost:7048/multiplayer/get-updated-board/${id}/${side === "attacker"}`)
-            console.log("resp:")
-            console.log(response)
             if (!response.status) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.data;
-            console.log("board:")
-            console.log(board)
-            console.log("data:")
-            console.log(data)
             
             if (data.length ) {
-                console.log("update set")
-                console.log(data)
                 setBoard(getBoardFromData(data))
                 setTurn(turn === 'attacker' ? 'defender' : 'attacker')
                 setMoveIsMade(false)
@@ -80,8 +72,7 @@ export default function OnlineMultiplayer() {
     function WrappedGame() {
         return <OnlineGame setOver={setOver} id={id} side={side} setBoard={setBoard} board={board} turn={turn} setMoveIsMade={setMoveIsMade} setTurn={setTurn}/>
     }
-    console.log("rerender in main:")
-    console.log(board)
+    
     return (
         <Fragment>
             <Header/>

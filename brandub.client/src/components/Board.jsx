@@ -13,13 +13,13 @@ export default class Board extends React.Component {
                     {
                         this.props.squares[i] ?
                         {
-                            backgroundImage: this.props.squares[i].style.backgroundImage + ", url('https://psv4.userapi.com/c237331/u179121380/docs/d49/2f1f3e094876/rune.png?extra=Ql6Q9yz7HFlzb6T9SN-gc0kDpoPzW7DDOyGK1yoPUAKul-HJM3ilP6Buwpj0xjQA9g4KZaqbFVlro9MvDGzNR1wC6PABGx0oLqECKL_0-kQVp0QmdRlo6RpsOvYQJ9D-LQKe8idQLo8eZogtZo-wbFwPpA')",
+                            backgroundImage: this.props.squares[i].style.backgroundImage + ", url('https://i.imgur.com/vCoMFU1.png')",
                             backgroundPosition: "center",
                             backgroundColor: this.props.squares[i].style.backgroundColor
                         }   
                         :
                         {
-                            backgroundImage: "url('https://psv4.userapi.com/c237331/u179121380/docs/d49/2f1f3e094876/rune.png?extra=Ql6Q9yz7HFlzb6T9SN-gc0kDpoPzW7DDOyGK1yoPUAKul-HJM3ilP6Buwpj0xjQA9g4KZaqbFVlro9MvDGzNR1wC6PABGx0oLqECKL_0-kQVp0QmdRlo6RpsOvYQJ9D-LQKe8idQLo8eZogtZo-wbFwPpA')",
+                            backgroundImage: "url('https://i.imgur.com/vCoMFU1.png')",
                             backgroundPosition: "center"
                         }
                     }
@@ -46,8 +46,10 @@ export default class Board extends React.Component {
         }
 
         return (
-            <div className="board">
-                {board}
+            <div className="outer-div">
+                <div className="board">
+                    {board}
+                </div>
             </div>
         );
     }

@@ -8,7 +8,6 @@ import React from "react";
 export default class OnlineGame extends Game {
     constructor(props) {
         super(props);
-        console.log(this.props)
         this.state = {
             squares: this.props.board,
             setBoard: this.props.setBoard,
@@ -58,10 +57,6 @@ export default class OnlineGame extends Game {
             // проверка на наличие других фигур на пути
             const isMoveLegal = this.isMoveLegal(srcToDestPath);
 
-            console.log(isMovePossible.toString())
-            console.log(isMoveLegal.toString())
-
-
             if (isMovePossible && isMoveLegal) {
                 squares[i] = squares[this.state.sourceSelection];
                 squares[this.state.sourceSelection] = null;
@@ -70,10 +65,8 @@ export default class OnlineGame extends Game {
                 const winner = this.getWinner(squares)
 
                 if (winner === "attacker") {
-                    console.log("winn")
                     this.setState({winner: "attacker"})
                 } else if (winner === "defender") {
-                    console.log("winn")
                     this.setState({winner: "defender"})
                 }
 
@@ -83,16 +76,11 @@ export default class OnlineGame extends Game {
                 this.state.setBoard(squares)
                 this.props.setTurn(turn)
                 this.props.setMoveIsMade(true)
-                console.log("post")
                 const res = await axios.post(`https://localhost:7048/multiplayer/make-move`, {
                     id: this.props.id,
                     side: this.state.side === "attacker",
                     board: Array.from(squares).map(square => square === null ? null : square.isKing() ? "king" : square.player)
                 })
-                // ).then(res => console.log(res)).catch(err => console.log(err))
-                console.log(res)
-                console.log(squares)
-                console.log("asd")
 
                 this.setState(oldState => ({
                     sourceSelection: -1,
@@ -110,7 +98,6 @@ export default class OnlineGame extends Game {
     }
 
     deleteGame() {
-        // TODO: сделать нормальное логирование
         axios.delete(`https://localhost:7048/multiplayer/${this.props.id}`).catch(err => console.log(err))
     }
 
@@ -140,12 +127,19 @@ export default class OnlineGame extends Game {
                         </div>
                     </h2>
                 </ResultModal>
-                <div className="game">
-                    <div className="game-board">
-                        <Board
-                            squares={this.state.squares}
-                            onClick={(i) => this.handleClick(i)}
-                        />
+                <div className="centered-container">
+                    <div className="game">
+                        <div className="game-board">
+                            <Board
+                                squares={this.state.squares}
+                                onClick={(i) => this.handleClick(i)}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="centered-container">
+                    <div className="turn-window">
+                        <p style={{textAlign: "center"}}>Ход {this.state.turn === "attacker" ? "атакующих" : "защитников"}</p>
                     </div>
                 </div>
             </div>

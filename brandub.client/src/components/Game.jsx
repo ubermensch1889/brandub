@@ -29,7 +29,6 @@ export default class Game extends React.Component {
                 && squares[i + 1].player !== squares[i].player
                 && squares[i].player === squares[i + 2].player && !squares[i + 1].isKing()) {
                 squares[i + 1] = null
-                console.log("asdavf")
             }
             if (i + 14 < squares.length && squares[i] 
                 && squares[i + 7]
@@ -37,7 +36,6 @@ export default class Game extends React.Component {
                 && squares[i + 7].player !== squares[i].player
                 && squares[i].player === squares[i + 14].player && !squares[i + 14].isKing()) {
                 squares[i + 7] = null
-                console.log("asdavf")
             }
         }
     }
@@ -84,12 +82,10 @@ export default class Game extends React.Component {
                 const winner = this.getWinner(squares)
                 
                 if (winner === "attacker") {
-                    console.log("winn")
                     this.setState( { winner: "attacker" })
                 }
                 
                 else if (winner === "defender") {
-                    console.log("winn")
                     this.setState( { winner: "defender" })
                 }
                 
@@ -105,22 +101,17 @@ export default class Game extends React.Component {
                 }));
             }
             else {
-                console.log("asd")
                 this.setState({
                     status: "Wrong selection. Choose valid source and destination again.",
                     sourceSelection: -1,
                 });
             }
         }
-        console.log(this.state)
     }
 
     render() {
-        console.log("render")
         const squares = this.state.squares
         const winner = this.getWinner(squares)
-        console.log(squares)
-        console.log(winner)
         
         return (
             <div>
@@ -128,19 +119,26 @@ export default class Game extends React.Component {
                     <h2>{winner === "defender" ?
                         "Защитники победили!" :
                         "Атакующие победили!"}
-                    <div className="button-holder">
-                    <form action="/">
-                        <input type="submit" value="Вернуться на главную страницу"/>
-                    </form>
-                    </div>
+                        <div className="button-holder">
+                            <form action="/">
+                                <input type="submit" value="Вернуться на главную страницу"/>
+                            </form>
+                        </div>
                     </h2>
                 </ResultModal>
-                <div className="game">
-                    <div className="game-board">
-                    <Board
-                            squares={this.state.squares}
-                            onClick={(i) => this.handleClick(i)}
-                        />
+                <div className="centered-container">
+                    <div className="game">
+                        <div className="game-board">
+                            <Board
+                                squares={this.state.squares}
+                                onClick={(i) => this.handleClick(i)}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="centered-container">
+                    <div className="turn-window">
+                        <p style={{textAlign: "center"}}>Ход {this.state.turn === "attacker" ? "атакующих" : "защитников"}</p>
                     </div>
                 </div>
             </div>
@@ -148,7 +146,6 @@ export default class Game extends React.Component {
     }
 
     isMoveLegal(srcToDest) {
-        console.log(srcToDest)
         for (let i = 0; i < srcToDest.length; ++i) {
             if (this.state.squares[srcToDest[i]]) return false;
         }
@@ -172,7 +169,6 @@ export default class Game extends React.Component {
         }
 
         if (squares[48] && squares[48].isKing()) {
-            console.log("king came")
             return "defender"
         }
         
@@ -184,7 +180,6 @@ export default class Game extends React.Component {
                 && squares[i].player === squares[i + 2].player
                 && squares[i + 1].isKing()) {
                 
-                console.log('attackers won')
                 return "attacker"
                 
             }
@@ -194,8 +189,6 @@ export default class Game extends React.Component {
                 && squares[i + 7].player !== squares[i].player
                 && squares[i].player === squares[i + 14].player
                 && squares[i + 7].isKing()) {
-
-                console.log('attackers won')
                 
                 return "attacker"
             }

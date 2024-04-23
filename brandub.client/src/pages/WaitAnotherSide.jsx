@@ -19,12 +19,11 @@ export default function WaitAnotherSide() {
     async function checkGameStarted(setData) {
         try {
             const response = await axios.get(`https://localhost:7048/multiplayer/get-start/${id}`)
-            console.log(response)
+            
             if (!response.status) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.data;
-            console.log(data)
 
             if (data) {
                 navigate(`/online-multiplayer/game?id=${id}&side=${side}`)

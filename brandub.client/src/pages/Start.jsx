@@ -25,7 +25,6 @@ function Start() {
             method: "POST"
         });
         const data = await response.text();
-        console.log(side)
         navigate(`online-multiplayer/wait?id=${data}&side=${side}`.replace(/"/g, ""))
 
         setIsSending(false)
@@ -48,10 +47,11 @@ function Start() {
                         </h2>
                         <div>
                             <label>
-                                <input type="radio" name="multiplayerChoice" defaultChecked 
-                                       onClick={() => setSide("attacker")} />
+                                <input type="radio" name="multiplayerChoice" defaultChecked
+                                       onClick={() => setSide("attacker")}/>
                                 Атакующие
                             </label>
+                            <br/>
                             <label>
                                 <input type="radio" name="multiplayerChoice" onClick={() => setSide("defender")}/>
                                 Защитники
@@ -70,9 +70,10 @@ function Start() {
                         <div>
                             <label>
                                 <input type="radio" name="botChoice" defaultChecked
-                                       onClick={() => setSide("attacker")} />
+                                       onClick={() => setSide("attacker")}/>
                                 Атакующие
                             </label>
+                            <br/>
                             <label>
                                 <input type="radio" name="botChoice" onClick={() => setSide("defender")}/>
                                 Защитники
