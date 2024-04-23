@@ -13,15 +13,14 @@ export default class Board extends React.Component {
                     {
                         this.props.squares[i] ?
                         {
-                            backgroundImage: this.props.squares[i].style.backgroundImage + ", url('https://psv4.userapi.com/c909228/u179121380/docs/d46/b69f199aecf3/output-onlinepngtools.png?extra=8ZRdnhnLlQ6E8I8eHM-1YBgvhSnLQRHdWEb2C6MnfnSqlaXYyYTffyvxMWoFgmgr5zWDylFXd5RtzLXNlAnGLvKLGDk43mkDij9myJx1UIEyRWZb123njzpw81WP15QYCnMP__9KE2QCImaft6Bz4eZiCw')",
-                            backgroundPosition: "center"
+                            backgroundImage: this.props.squares[i].style.backgroundImage + ", url('https://psv4.userapi.com/c237331/u179121380/docs/d49/2f1f3e094876/rune.png?extra=Ql6Q9yz7HFlzb6T9SN-gc0kDpoPzW7DDOyGK1yoPUAKul-HJM3ilP6Buwpj0xjQA9g4KZaqbFVlro9MvDGzNR1wC6PABGx0oLqECKL_0-kQVp0QmdRlo6RpsOvYQJ9D-LQKe8idQLo8eZogtZo-wbFwPpA')",
+                            backgroundPosition: "center",
+                            backgroundColor: this.props.squares[i].style.backgroundColor
                         }   
                         :
                         {
-                            backgroundImage: "url('https://psv4.userapi.com/c909228/u179121380/docs/d46/b69f199aecf3/output-onlinepngtools.png?extra=8ZRdnhnLlQ6E8I8eHM-1YBgvhSnLQRHdWEb2C6MnfnSqlaXYyYTffyvxMWoFgmgr5zWDylFXd5RtzLXNlAnGLvKLGDk43mkDij9myJx1UIEyRWZb123njzpw81WP15QYCnMP__9KE2QCImaft6Bz4eZiCw')",
-                            backgroundPosition: "center",
-                            backgroundSize: "95% 80%",
-                            backgroundRepeat: "no-repeat"
+                            backgroundImage: "url('https://psv4.userapi.com/c237331/u179121380/docs/d49/2f1f3e094876/rune.png?extra=Ql6Q9yz7HFlzb6T9SN-gc0kDpoPzW7DDOyGK1yoPUAKul-HJM3ilP6Buwpj0xjQA9g4KZaqbFVlro9MvDGzNR1wC6PABGx0oLqECKL_0-kQVp0QmdRlo6RpsOvYQJ9D-LQKe8idQLo8eZogtZo-wbFwPpA')",
+                            backgroundPosition: "center"
                         }
                     }
                 onClick={() => this.props.onClick(i)}
