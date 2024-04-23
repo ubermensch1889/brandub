@@ -8,7 +8,7 @@ namespace brandub.Server.Controllers;
 [Route("multiplayer")]
 public class GameController : ControllerBase
 {
-    private GamesService _service;
+    private readonly GamesService _service;
     public GameController(GamesService service)
     {
         _service = service;
@@ -47,14 +47,7 @@ public class GameController : ControllerBase
     [HttpGet("get-updated-board/{id:guid}/{turn:bool}")]
     public IEnumerable<CellState> GetUpdatedBoard(Guid id, bool turn)
     {
-        var game = _service.Get().First(g => g.Id == id);
-
-        if (game.Turn == turn)
-        {
-            return game.Field;
-        }
-        // если доска не изменилась (так как противник не сходил), то возващаем пустое перечислимое
-        return Enumerable.Empty<CellState>();
+        return _service.GetUpdatedBoard(id, turn);
     }
     
     /// <summary>
@@ -70,37 +63,14 @@ public class GameController : ControllerBase
             return Content("Error: null move info");
         }
 
-        Game game;
-
         try
         {
-            game = _service.Get().First(g => g.Id == info.Id);
+            _service.MakeMove(info);
         }
         catch (InvalidOperationException ex)
         {
-            return Content("Error: no such game");
+            return Content(ex.Message);
         }
-        
-        if (game.Turn != info.Side)
-        {
-            return Content("Error: not your turn");
-        }
-        
-        // переводим входные данные в нужный формат
-        CellState[] field = new CellState[49];
-
-        for (int i = 0; i < 49; ++i)
-        {
-            field[i] = info.Board[i] switch
-            {
-                null => CellState.Empty,
-                "attacker" => CellState.Attacker,
-                "defender" => CellState.Defender,
-                _ => CellState.King
-            };
-        }
-        
-        _service.Update(info.Id, field, !info.Side, game.Started);
         
         return Ok();
     }
@@ -113,10 +83,7 @@ public class GameController : ControllerBase
     [HttpDelete("{id:guid}")]
     public ActionResult DeleteGame(Guid id)
     {
-        if (_service.Get().Exists(g => g.Id == id))
-        {
-            _service.Delete(id);
-        }
+        _service.DeleteGame(id);
 
         return Ok();
     } 

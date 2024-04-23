@@ -8,7 +8,7 @@ namespace brandub.Server.Controllers;
 [Route("create-online-game")]
 public class CreatingMultiplayerGameController : ControllerBase
 {
-    private GamesService _service;
+    private readonly GamesService _service;
     public CreatingMultiplayerGameController(GamesService service)
     {
         _service = service;
@@ -17,11 +17,6 @@ public class CreatingMultiplayerGameController : ControllerBase
     [HttpPost]
     public Guid CreateGame()
     {
-        // будем возвращать id новосозданной игры
-        var id = Guid.NewGuid();
-        var game = new Game(id);
-        _service.Create(game);
-
-        return id;
+        return _service.CreateGame();
     }
 }
