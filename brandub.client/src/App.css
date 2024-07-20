@@ -1,19 +1,141 @@
-﻿#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+﻿body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-image: url('assets/runes.png');
+    background-repeat: repeat;
+    background-size: 250px;
+}
+
+header {
+    background-color: rgba(255,255,255,0.9);
+    color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
     text-align: center;
 }
 
-tr:nth-child(even) {
-    background: #F2F2F2;
+h1 {
+    font-size: 36px;
+    color: #404040;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin: 0;
 }
 
-tr:nth-child(odd) {
-    background: #FFF;
+.modes-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.mode {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    border : none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: #000000;
+}
+
+.mode:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+.rules {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.gap {
+    width: 20px;
+}
+
+.board {
+    margin: 20px auto 0;
+}
+
+.board-row:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.status {
+    margin-bottom: 10px;
+}
+
+.square {
+    display: flex;
+    background-size: cover;
+    border: 1px solid rgba(0,0,0,0.2);
+    float: left;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 80px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 80px;
+}
+
+.square:focus {
+    outline: none;
+}
+
+.kbd-navigation .square:focus {
+    background: #ddd;
+}
+
+.game-info {
+    margin-left: 20px;
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.turn-window {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 10px; 
+    padding: 1px;
+    box-shadow: 0 4px 20px 2px rgba(100, 100, 100, 0.5); 
+    width: 200px; 
+    height: 50px;
+}
+
+.icons-attribution, .game-status, .fallen-soldier-block{
+    margin-top: 20px;
+    min-height: 50px;
+}
+
+.square{
+    background-color: RGB(234,240,206);
+}
+
+#player-turn-box{
+    width: 32px;
+    height: 32px;
+    border: 1px solid #000;
+    margin-bottom: 10px;
 }

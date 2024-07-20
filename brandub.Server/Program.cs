@@ -1,3 +1,8 @@
+using brandub.Server.DataAccess;
+using brandub.Server.DataAccess.Entities.Repositories;
+using brandub.Server.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace brandub.Server
 {
     public class Program
@@ -5,6 +10,16 @@ namespace brandub.Server
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var myAllowSpecificOrigins = "Access-Control-Allow-Origin";
+            
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: myAllowSpecificOrigins,
+                    policy  =>
+                    {
+                        policy.WithOrigins("https://localhost:7048");
+                    });
+            });
 
             // Add services to the container.
 
@@ -12,7 +27,16 @@ namespace brandub.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
+            // подключаем базу данных
+            builder.Services.AddDbContext<GameDbContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(GameDbContext)) ?? string.Empty);
+            });
 
+            builder.Services.AddScoped<GamesService>();
+            builder.Services.AddScoped<GamesRepository>();
+            
             var app = builder.Build();
 
             app.UseDefaultFiles();
@@ -26,10 +50,15 @@ namespace brandub.Server
             }
 
             app.UseHttpsRedirection();
+            
+            app.UseCors(b => b
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+            );
 
             app.UseAuthorization();
-
-
+        
             app.MapControllers();
 
             app.MapFallbackToFile("/index.html");

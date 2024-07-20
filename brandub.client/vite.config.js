@@ -46,10 +46,19 @@ export default defineConfig({
     },
     server: {
         proxy: {
+            '^/multiplayer/.*': {
+                target: 'https://localhost:7048/',
+                secure: false
+            },
             '^/weatherforecast': {
                 target: 'https://localhost:7048/',
                 secure: false
+            },
+            '^/create-online-game': {
+                target: 'https://localhost:7048/',
+                secure: false
             }
+            
         },
         port: 5173,
         https: {
